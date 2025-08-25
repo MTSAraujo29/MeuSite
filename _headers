@@ -1,0 +1,18 @@
+# Cabeçalhos globais aplicados a todos os caminhos
+/*
+  X-Frame-Options: DENY
+  X-XSS-Protection: 1; mode=block
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  Content-Security-Policy: upgrade-insecure-requests
+  Permissions-Policy: camera=(), microphone=(), geolocation=()
+
+# Cabeçalhos específicos para recursos estáticos
+/img/*
+  Cache-Control: public, max-age=31536000, immutable
+
+*.js
+  Cache-Control: public, max-age=31536000, immutable
+
+*.css
+  Cache-Control: public, max-age=31536000, immutable

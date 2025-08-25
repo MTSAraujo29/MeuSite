@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Portfólio de Matheus Araújo - Desenvolvedor Full Stack">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="theme-color" content="#00ff00">
+    <title>Matheus Araújo | Desenvolvedor Full Stack</title>
+    <link rel="icon" type="image/png" href="img/favicon.png">
+    <link rel="preload" href="style.css" as="style">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" as="style">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;600;700&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="noise"></div>
+    <div class="overlay"></div>
+    
+    <header>
+        <div class="container">
+            <div class="logo">
+                <span>&lt;MA/&gt;</span>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#sobre">Sobre</a></li>
+                    <li><a href="#projetos">Projetos</a></li>
+                    <li><a href="#habilidades">Habilidades</a></li>
+                    <li><a href="#contato">Contato</a></li>
+                </ul>
+            </nav>
+            <div class="menu-toggle">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section id="home" class="hero">
+            <div class="container">
+                <div class="hero-content">
+                    <div class="hero-text">
+                        <h1>Matheus Araújo</h1>
+                        <div class="typing-container">
+                            <span class="static-text">Desenvolvedor</span>
+                            <span class="dynamic-text" data-words="Full Stack, Front-end, Back-end, Web, Mobile"></span>
+                        </div>
+                        <p>Transformando ideias em código e criando soluções digitais inovadoras.</p>
+                        <div class="hero-buttons">
+                            <a href="#projetos" class="btn btn-primary">Ver Projetos</a>
+                            <a href="#contato" class="btn btn-secondary">Contato</a>
+                        </div>
+                    </div>
+                    <div class="hero-image">
+                        <div class="image-container">
+                            <img src="img/Eu.png" alt="Matheus Araújo" width="400" height="400" fetchpriority="high">
+                            <div class="glow"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="scroll-indicator">
+                <div class="mouse">
+                    <div class="wheel"></div>
+                </div>
+                <div class="arrow">
+                    <span></span>
+                </div>
+            </div>
+        </section>
+
+        <section id="sobre" class="about">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Sobre Mim</h2>
+                    <div class="line"></div>
+                </div>
+                <div class="about-content">
+                    <div class="about-text">
+                        <p>Olá! Sou Matheus Araújo, desenvolvedor Full Stack apaixonado por criar soluções digitais inovadoras e funcionais. Formado em Ciência da Computação, tenho experiência em diversas tecnologias e linguagens de programação.</p>
+                        <p>Minha abordagem combina criatividade com pensamento analítico para desenvolver aplicações que não apenas funcionam perfeitamente, mas também proporcionam uma excelente experiência ao usuário.</p>
+                        <div class="about-stats">
+                            <div class="stat">
+                                <span class="number">3+</span>
+                                <span class="label">Anos de Experiência</span>
+                            </div>
+                            <div class="stat">
+                                <span class="number">20+</span>
+                                <span class="label">Projetos Concluídos</span>
+                            </div>
+                            <div class="stat">
+                                <span class="number">10+</span>
+                                <span class="label">Clientes Satisfeitos</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="projetos" class="projects">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Meus Projetos</h2>
+                    <div class="line"></div>
+                </div>
+                <div class="carousel-container">
+                    <div class="carousel">
+                        <div class="carousel-item">
+                            <div class="project-card">
+                                <div class="project-image">
+                                    <img src="img/1.png" alt="Projeto 1" loading="lazy" width="800" height="600">
+                                </div>
+                                <div class="project-info">
+                                    <h3>Aplicação Web</h3>
+                                    <p>Desenvolvimento de aplicação web com React e Node.js</p>
+                                    <div class="project-tech">
+                                        <span>React</span>
+                                        <span>Node.js</span>
+                                        <span>MongoDB</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <div class="project-card">
+                                <div class="project-image">
+                                    <img src="img/2.png" alt="Projeto 2" loading="lazy" width="800" height="600">
+                                </div>
+                                <div class="project-info">
+                                    <h3>E-commerce</h3>
+                                    <p>Plataforma de e-commerce completa com sistema de pagamento</p>
+                                    <div class="project-tech">
+                                        <span>React</span>
+                                        <span>Express</span>
+                                        <span>MySQL</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <div class="project-card">
+                                <div class="project-image">
+                                    <img src="img/3.png" alt="Projeto 3" loading="lazy" width="800" height="600">
+                                </div>
+                                <div class="project-info">
+                                    <h3>Portfólio Web</h3>
+                                    <p>Site desenvolvido com React Native</p>
+                                    <div class="project-tech">
+                                        <span>React Native</span>
+                                        <span>JavaScript</span>
+                                        <span>MongoDB</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <div class="project-card">
+                                <div class="project-image">
+                                    <img src="img/4.png" alt="Projeto 4" loading="lazy" width="800" height="600">
+                                </div>
+                                <div class="project-info">
+                                    <h3>Dashboard Analítico</h3>
+                                    <p>Dashboard para visualização de dados em tempo real do meu TCC</p>
+                                    <div class="project-tech">
+                                        <span>Node.js</span>
+                                        <span>React.js</span>
+                                        <span>MongoDB</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="carousel-controls">
+                        <button class="prev-btn"><i class="fas fa-chevron-left"></i></button>
+                        <div class="carousel-dots"></div>
+                        <button class="next-btn"><i class="fas fa-chevron-right"></i></button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="habilidades" class="skills">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Minhas Habilidades</h2>
+                    <div class="line"></div>
+                </div>
+                <div class="skills-content">
+                    <div class="skill-category">
+                        <h3>Front-end</h3>
+                        <div class="skill-grid">
+                            <div class="skill-item">
+                                <div class="skill-icon"><i class="fab fa-html5"></i></div>
+                                <span>HTML5</span>
+                            </div>
+                            <div class="skill-item">
+                                <div class="skill-icon"><i class="fab fa-css3-alt"></i></div>
+                                <span>CSS3</span>
+                            </div>
+                            <div class="skill-item">
+                                <div class="skill-icon"><i class="fab fa-js"></i></div>
+                                <span>JavaScript</span>
+                            </div>
+                            <div class="skill-item">
+                                <div class="skill-icon"><i class="fab fa-react"></i></div>
+                                <span>React</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="skill-category">
+                        <h3>Back-end</h3>
+                        <div class="skill-grid">
+                            <div class="skill-item">
+                                <div class="skill-icon"><i class="fab fa-node-js"></i></div>
+                                <span>Node.js</span>
+                            </div>
+                            <div class="skill-item">
+                                <div class="skill-icon"><i class="fab fa-python"></i></div>
+                                <span>Python</span>
+                            </div>
+                            <div class="skill-item">
+                                <div class="skill-icon"><i class="fas fa-database"></i></div>
+                                <span>SQL</span>
+                            </div>
+                            <div class="skill-item">
+                                <div class="skill-icon"><i class="fas fa-server"></i></div>
+                                <span>MongoDB</span>
+                            </div>
+                            <div class="skill-item">
+                                <div class="skill-icon"><i class="fab fa-java"></i></div>
+                                <span>Java</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="skill-category">
+                        <h3>Ferramentas & Outros</h3>
+                        <div class="skill-grid">
+                            <div class="skill-item">
+                                <div class="skill-icon"><i class="fab fa-git-alt"></i></div>
+                                <span>Git</span>
+                            </div>
+                            <div class="skill-item">
+                                <div class="skill-icon"><i class="fas fa-mobile-alt"></i></div>
+                                <span>Responsive</span>
+                            </div>
+                            <div class="skill-item">
+                                <div class="skill-icon"><i class="fas fa-cloud"></i></div>
+                                <span>AWS</span>
+                            </div>
+                            <div class="skill-item">
+                                <div class="skill-icon"><i class="fas fa-code-branch"></i></div>
+                                <span>CI/CD</span>
+                            </div>
+                            <div class="skill-item">
+                                <div class="skill-icon"><i class="fas fa-terminal"></i></div>
+                                <span>DevOps</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contato" class="contact">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Entre em Contato</h2>
+                    <div class="line"></div>
+                </div>
+                <div class="contact-content">
+                    <div class="contact-info">
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fab fa-whatsapp"></i>
+                            </div>
+                            <div class="contact-text">
+                                <h3>WhatsApp</h3>
+                                <p><a href="https://wa.me/5562993955126" target="_blank">+55 62 99395-5126</a></p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fab fa-github"></i>
+                            </div>
+                            <div class="contact-text">
+                                <h3>GitHub</h3>
+                                <p><a href="https://github.com/MTSAraujo29" target="_blank">MTSAraujo29</a></p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fab fa-linkedin"></i>
+                            </div>
+                            <div class="contact-text">
+                                <h3>LinkedIn</h3>
+                                <p><a href="https://linkedin.com/in/matheus-ferreira-de-araújo-0283021ba/" target="_blank">Matheus Ferreira de Araújo</a></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="contact-form">
+                        <form id="contactForm">
+                            <div class="form-group">
+                                <input type="text" id="name" name="name" placeholder="Seu Nome" required>
+                                <div class="form-highlight"></div>
+                            </div>
+                            <div class="form-group">
+                                <input type="email" id="email" name="email" placeholder="Seu Email" required>
+                                <div class="form-highlight"></div>
+                            </div>
+                            <div class="form-group">
+                                <textarea id="message" name="message" placeholder="Sua Mensagem" required></textarea>
+                                <div class="form-highlight"></div>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Enviar Mensagem</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <span>&lt;MA/&gt;</span>
+                    <p>Matheus Araújo</p>
+                </div>
+                <div class="footer-social">
+                    <a href="https://github.com/MTSAraujo29" target="_blank"><i class="fab fa-github"></i></a>
+                    <a href="https://linkedin.com/in/matheus-ferreira-de-araújo-0283021ba/" target="_blank"><i class="fab fa-linkedin"></i></a>
+                    <a href="https://wa.me/5562993955126" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Matheus Araújo. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
