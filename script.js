@@ -1,231 +1,130 @@
-// Esperar que o DOM seja completamente carregado
-document.addEventListener('DOMContentLoaded', function() {
-    // Elementos do DOM
-    const header = document.querySelector('header');
-    const menuToggle = document.querySelector('.menu-toggle');
-    const nav = document.querySelector('nav');
-    const navLinks = document.querySelectorAll('nav ul li a');
-    const scrollIndicator = document.querySelector('.scroll-indicator');
-    const dynamicText = document.querySelector('.dynamic-text');
-    const sections = document.querySelectorAll('section');
-    const dots = document.querySelectorAll('.dot');
-    const prevBtn = document.querySelector('.prev-btn');
-    const nextBtn = document.querySelector('.next-btn');
-    const carousel = document.querySelector('.carousel');
-    
-    // Variáveis
-    let currentSlide = 0;
-    const totalSlides = document.querySelectorAll('.carousel-item').length;
-    const phrases = ['Desenvolvedor Full Stack', 'Especialista em Web', 'Solucionador de Problemas'];
-    let phraseIndex = 0;
-    let charIndex = 0;
-    let isDeleting = false;
-    let typingSpeed = 100;
-    
-    // Efeito de digitação
-    function typeEffect() {
-        const currentPhrase = phrases[phraseIndex];
-        
-        if (isDeleting) {
-            // Deletando caracteres
-            dynamicText.textContent = currentPhrase.substring(0, charIndex - 1);
-            charIndex--;
-            typingSpeed = 50;
+document.addEventListener('DOMContentLoaded', () => {
+    const mobileToggle = document.querySelector('.mobile-toggle');
+    const sidebar = document.querySelector('.sidebar');
+    const navLinks = document.querySelectorAll('.sidebar-nav a');
+
+    // Toggle Sidebar
+    mobileToggle.addEventListener('click', () => {
+        sidebar.classList.toggle('active');
+
+        // Toggle Icon
+        const icon = mobileToggle.querySelector('i');
+        if (sidebar.classList.contains('active')) {
+            icon.classList.remove('fa-bars');
+            icon.classList.add('fa-times');
         } else {
-            // Adicionando caracteres
-            dynamicText.textContent = currentPhrase.substring(0, charIndex + 1);
-            charIndex++;
-            typingSpeed = 100;
+            icon.classList.remove('fa-times');
+            icon.classList.add('fa-bars');
         }
-        
-        // Verificar se a palavra está completa
-        if (!isDeleting && charIndex === currentPhrase.length) {
-            // Pausa no final da palavra
-            isDeleting = true;
-            typingSpeed = 1500;
-        } else if (isDeleting && charIndex === 0) {
-            // Mudar para a próxima palavra
-            isDeleting = false;
-            phraseIndex = (phraseIndex + 1) % phrases.length;
-            typingSpeed = 500;
-        }
-        
-        setTimeout(typeEffect, typingSpeed);
-    }
-    
-    // Iniciar efeito de digitação
-    setTimeout(typeEffect, 1000);
-    
-    // Controle do carrossel
-    function showSlide(index) {
-        if (index < 0) {
-            currentSlide = totalSlides - 1;
-        } else if (index >= totalSlides) {
-            currentSlide = 0;
-        } else {
-            currentSlide = index;
-        }
-        
-        // Atualizar posição do carrossel
-        carousel.style.transform = `translateX(-${currentSlide * 100}%)`;
-        
-        // Atualizar dots ativos
-        dots.forEach((dot, i) => {
-            dot.classList.toggle('active', i === currentSlide);
-        });
-    }
-    
-    // Event listeners para os botões do carrossel
-    if (prevBtn) {
-        prevBtn.addEventListener('click', () => {
-            showSlide(currentSlide - 1);
-        });
-    }
-    
-    if (nextBtn) {
-        nextBtn.addEventListener('click', () => {
-            showSlide(currentSlide + 1);
-        });
-    }
-    
-    // Event listeners para os dots do carrossel
-    dots.forEach((dot, i) => {
-        dot.addEventListener('click', () => {
-            showSlide(i);
-        });
     });
-    
-    // Inicializar o carrossel
-    showSlide(0);
-    
-    // Menu mobile toggle
-    if (menuToggle) {
-        menuToggle.addEventListener('click', () => {
-            nav.classList.toggle('active');
-            menuToggle.classList.toggle('active');
-        });
-    }
-    
-    // Fechar menu ao clicar em um link
+
+    // Close Sidebar when clicking a link (mobile)
     navLinks.forEach(link => {
         link.addEventListener('click', () => {
-            nav.classList.remove('active');
-            menuToggle.classList.remove('active');
-        });
-    });
-    
-    // Scroll suave para as seções
-    navLinks.forEach(link => {
-        link.addEventListener('click', function(e) {
-            e.preventDefault();
-            
-            const targetId = this.getAttribute('href');
-            const targetSection = document.querySelector(targetId);
-            
-            if (targetSection) {
-                window.scrollTo({
-                    top: targetSection.offsetTop - 80,
-                    behavior: 'smooth'
-                });
+            if (window.innerWidth <= 768) {
+                sidebar.classList.remove('active');
+                const icon = mobileToggle.querySelector('i');
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
             }
         });
     });
-    
-    // Adicionar classe 'scrolled' ao header quando rolar a página
+
+    // Active Link Highlight on Scroll
+    const sections = document.querySelectorAll('section');
+
     window.addEventListener('scroll', () => {
-        if (window.scrollY > 50) {
-            header.classList.add('scrolled');
-            if (scrollIndicator) {
-                scrollIndicator.style.opacity = '0';
-            }
-        } else {
-            header.classList.remove('scrolled');
-            if (scrollIndicator) {
-                scrollIndicator.style.opacity = '1';
-            }
-        }
-        
-        // Destacar link de navegação ativo com base na seção visível
         let current = '';
-        
+
         sections.forEach(section => {
             const sectionTop = section.offsetTop;
             const sectionHeight = section.clientHeight;
-            
-            if (window.scrollY >= (sectionTop - 200)) {
+            if (pageYOffset >= (sectionTop - sectionHeight / 3)) {
                 current = section.getAttribute('id');
             }
         });
-        
+
         navLinks.forEach(link => {
             link.classList.remove('active');
-            if (link.getAttribute('href') === `#${current}`) {
+            if (link.getAttribute('href').includes(current)) {
                 link.classList.add('active');
             }
         });
     });
-    
-    // Animações de entrada
-    const fadeElements = document.querySelectorAll('.fade-in');
-    
-    const fadeObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.style.opacity = 1;
-                entry.target.style.transform = 'translateY(0)';
-                fadeObserver.unobserve(entry.target);
-            }
-        });
-    }, { threshold: 0.1 });
-    
-    fadeElements.forEach(element => {
-        element.style.opacity = 0;
-        element.style.transform = 'translateY(20px)';
-        element.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-        fadeObserver.observe(element);
-    });
-    
-    // Formulário de contato
-    const contactForm = document.querySelector('.contact-form form');
-    
-    if (contactForm) {
-        contactForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            // Aqui você pode adicionar a lógica para enviar o formulário
-            // Por exemplo, usando fetch para enviar os dados para um servidor
-            
-            // Simulação de envio bem-sucedido
-            const formElements = contactForm.elements;
-            let formData = {};
-            
-            for (let i = 0; i < formElements.length; i++) {
-                const element = formElements[i];
-                if (element.name) {
-                    formData[element.name] = element.value;
+
+    // Terminal Typewriter Effect
+    const terminalText = document.getElementById('terminalText');
+    const aboutSection = document.getElementById('sobre');
+    let hasTyped = false;
+
+    const textToType = [
+        "Olá! Meu nome é Matheus e gosto de desenvolver e projetar ferramentas através da tecnologia. Meu interesse em desenvolvimento web começou quando decidi tentar editar temas personalizados — o que me ensinou muito sobre HTML & CSS!",
+        "", // Empty string for paragraph break
+        "Hoje, tive o privilégio de trabalhar em diversos projetos acadêmicos e pessoais. Meu foco principal atualmente é construir produtos acessíveis e inclusivos e experiências digitais para uma variedade de clientes.",
+        "",
+        "Como já mencionado anteriomente sempre estou em constante aprimoramento técnico, atualmente focado em Data Science. Trazendo para meu stack conhecimentos em desenvolvimento web e software e Data Science.",
+        "",
+        "Aqui estão algumas tecnologias com as quais tenho trabalhado recentemente em ranking:",
+        "",
+        "> 1° JavaScript (ES6+)",
+        "> 2° Node.js (express.js)",
+        "> 3° React.js",
+        "> 4° Python",
+        "> 5° Power BI",
+        "> 6° R"
+    ];
+
+    function typeWriter(textArray, element) {
+        let lineIndex = 0;
+        let charIndex = 0;
+
+        function typeLine() {
+            if (lineIndex < textArray.length) {
+                const currentLine = textArray[lineIndex];
+
+                // Create a p element for the line if it doesn't exist yet for this line
+                let p = element.children[lineIndex];
+                if (!p) {
+                    p = document.createElement('p');
+                    p.style.margin = "0 0 5px 0";
+                    p.style.minHeight = "20px";
+                    if (currentLine.startsWith("> ")) {
+                        p.style.color = "#38bdf8"; // Access accent color roughly
+                        p.style.fontFamily = "monospace";
+                    }
+                    element.appendChild(p);
                 }
+
+                if (charIndex < currentLine.length) {
+                    p.textContent += currentLine.charAt(charIndex);
+                    charIndex++;
+                    setTimeout(typeLine, 20); // Typing speed
+                } else {
+                    lineIndex++;
+                    charIndex = 0;
+                    setTimeout(typeLine, 100); // Delay between lines
+                }
+            } else {
+                // Blink cursor at the end
+                const cursor = document.createElement('span');
+                cursor.className = 'cursor';
+                element.appendChild(cursor);
             }
-            
-            console.log('Dados do formulário:', formData);
-            
-            // Limpar o formulário após o envio
-            contactForm.reset();
-            
-            // Mostrar mensagem de sucesso (você pode personalizar isso)
-            alert('Mensagem enviada com sucesso! Entrarei em contato em breve.');
-        });
+        }
+
+        typeLine();
     }
-    
-    // Efeito de hover nos ícones de habilidades
-    const skillIcons = document.querySelectorAll('.skill-icon');
-    
-    skillIcons.forEach(icon => {
-        icon.addEventListener('mouseenter', function() {
-            this.classList.add('glow-effect');
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting && !hasTyped) {
+                hasTyped = true;
+                typeWriter(textToType, terminalText);
+            }
         });
-        
-        icon.addEventListener('mouseleave', function() {
-            this.classList.remove('glow-effect');
-        });
-    });
+    }, { threshold: 0.3 });
+
+    if (aboutSection) {
+        observer.observe(aboutSection);
+    }
 });
