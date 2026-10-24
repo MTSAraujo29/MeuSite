@@ -37,7 +37,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=IBM+Plex+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
 
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css?v=20261024-2">
   <script>
     (function () {
       document.documentElement.classList.add('js');
@@ -57,7 +57,7 @@
     "name": "Matheus Ferreira de Araujo",
     "jobTitle": "Desenvolvedor Full-Stack",
     "url": "https://matheusaraujodev.netlify.app/",
-    "image": "https://matheusaraujodev.netlify.app/img/retrato-halftone.webp",
+    "image": "https://matheusaraujodev.netlify.app/img/retrato-pixel.webp",
     "alumniOf": {
       "@type": "CollegeOrUniversity",
       "name": "Universidade Paulista — UNIP"
@@ -82,6 +82,9 @@
         <span class="brand__mark" aria-hidden="true">
           <img class="brand__logo brand__logo--dark" src="img/logo-dark.png" alt="" width="103" height="31">
           <img class="brand__logo brand__logo--light" src="img/logo-light.png" alt="" width="103" height="31">
+          <span class="brand__avatar" data-brand-avatar>
+            <img src="img/retrato-pixel.webp" alt="" width="640" height="800">
+          </span>
         </span>
         <span class="brand__text">Matheus Araujo</span>
       </a>
@@ -164,14 +167,11 @@
             </div>
           </div>
 
-          <figure class="portrait reveal">
-            <a class="portrait__frame" href="#sobre" aria-label="Ir para a seção sobre Matheus">
-              <picture>
-                <source srcset="img/retrato-halftone-480.webp 480w, img/retrato-halftone.webp 760w" sizes="(max-width: 900px) 78vw, 390px" type="image/webp">
-                <img class="portrait__halftone" src="img/retrato-halftone.webp" width="760" height="950" alt="Retrato de Matheus Araujo em meio-tom" fetchpriority="high">
-              </picture>
-              <img class="portrait__color" src="img/retrato.webp" width="760" height="950" alt="" loading="lazy" decoding="async">
-              <span class="portrait__badge">Meio-tom · 2026</span>
+          <figure class="portrait reveal" data-portrait>
+            <a class="portrait__frame" href="#sobre" aria-label="Ir para a seção sobre Matheus" data-portrait-frame>
+              <img class="portrait__pixels" src="img/retrato-pixel.webp" width="640" height="800" alt="Retrato de Matheus Araujo formado por pontos em meio-tom" fetchpriority="high">
+              <img class="portrait__color" src="img/retrato-pixel-color.webp" width="640" height="800" alt="" loading="lazy" decoding="async">
+              <span class="portrait__badge">Pixels · 2026</span>
               <span class="portrait__hint">ver em cores <span aria-hidden="true">↗</span></span>
               <span class="portrait__corners" aria-hidden="true"></span>
             </a>
@@ -652,6 +652,6 @@
 
   <div class="toast" role="status" aria-live="polite" aria-atomic="true" data-toast></div>
 
-  <script src="script.js" defer onerror="document.documentElement.classList.remove('js')"></script>
+  <script src="script.js?v=20261024-2" defer onerror="document.documentElement.classList.remove('js')"></script>
 </body>
 </html>

@@ -15,15 +15,16 @@
     Permissions-Policy = "camera=(), microphone=(), geolocation=()"
 
 # Cabeçalhos específicos para recursos estáticos
+# CSS/JS mudam junto com o HTML e não têm hash no nome: devem revalidar.
 [[headers]]
   for = "*.js"
   [headers.values]
-    Cache-Control = "public, max-age=31536000, immutable"
+    Cache-Control = "public, max-age=0, must-revalidate"
 
 [[headers]]
   for = "*.css"
   [headers.values]
-    Cache-Control = "public, max-age=31536000, immutable"
+    Cache-Control = "public, max-age=0, must-revalidate"
 
 [[headers]]
   for = "*.png"

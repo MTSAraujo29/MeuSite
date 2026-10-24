@@ -168,6 +168,255 @@
     });
   }
 
+  /* ───────────────────── Retrato → avatar do header ───────────────────── */
+
+  const portrait = $('[data-portrait]');
+  const portraitFrame = $('[data-portrait-frame]');
+  const brandAvatar = $('[data-brand-avatar]');
+
+  if (portrait && portraitFrame && brandAvatar && header) {
+    let docked = false;
+    let flying = false;
+    let portraitTicking = false;
+
+    const compactQuery = window.matchMedia('(max-width: 900px)');
+    const edge = () => header.offsetHeight;
+    const noFlight = () => reduceMotion.matches;
+
+    function flightClone(from) {
+      const clone = document.createElement('div');
+      clone.className = 'portrait-flight';
+      clone.setAttribute('aria-hidden', 'true');
+
+      const image = document.createElement('img');
+      image.src = 'img/retrato-pixel.webp';
+      image.alt = '';
+      image.width = 640;
+      image.height = 800;
+      clone.appendChild(image);
+
+      clone.style.left = `${from.left}px`;
+      clone.style.top = `${from.top}px`;
+      clone.style.width = `${from.width}px`;
+      clone.style.height = `${from.height}px`;
+      document.body.appendChild(clone);
+      return clone;
+    }
+
+    // ida: destino fixo (avatar do header), animação declarativa
+    function flight(from, to, duration) {
+      if (noFlight() || typeof Element.prototype.animate !== 'function') return null;
+      const clone = flightClone(from);
+
+      const scaleX = to.width / from.width;
+      const scaleY = to.height / from.height;
+      const dx = to.left - from.left;
+      const dy = to.top - from.top;
+      const halfway = 0.55;
+      const midScaleX = 1 - (1 - scaleX) * halfway;
+      const midScaleY = 1 - (1 - scaleY) * halfway;
+      const midX = dx * 0.32;
+      const midY = dy * 0.55 - 26;
+
+      const animation = clone.animate(
+        [
+          { transform: 'translate(0, 0) scale(1, 1)', borderRadius: '0px' },
+          {
+            transform: `translate(${midX}px, ${midY}px) scale(${midScaleX}, ${midScaleY})`,
+            borderRadius: '2px',
+            offset: 0.55,
+          },
+          { transform: `translate(${dx}px, ${dy}px) scale(${scaleX}, ${scaleY})`, borderRadius: '1px' },
+        ],
+        {
+          duration,
+          easing: 'cubic-bezier(0.76, 0, 0.24, 1)',
+          fill: 'both',
+        }
+      );
+
+      return { clone, animation };
+    }
+
+    // volta: o retrato está no fluxo da página e se move enquanto rolamos,
+    // então o destino é lido a cada frame para o clone pousar no lugar certo.
+    function flightBack(from, getTo, duration) {
+      if (noFlight()) return null;
+      const clone = flightClone(from);
+      const started = performance.now();
+      const bezier = (x1, y1, x2, y2) => {
+        const cx = 3 * x1;
+        const bx = 3 * (x2 - x1) - cx;
+        const ax = 1 - cx - bx;
+        const cy = 3 * y1;
+        const by = 3 * (y2 - y1) - cy;
+        const ay = 1 - cy - by;
+        const sampleX = (t) => ((ax * t + bx) * t + cx) * t;
+        const sampleY = (t) => ((ay * t + by) * t + cy) * t;
+        const sampleDX = (t) => (3 * ax * t + 2 * bx) * t + cx;
+        return (x) => {
+          let t = x;
+          for (let i = 0; i < 6; i += 1) {
+            const offset = sampleX(t) - x;
+            const slope = sampleDX(t);
+            if (Math.abs(offset) < 1e-5 || Math.abs(slope) < 1e-6) break;
+            t -= offset / slope;
+          }
+          return sampleY(Math.min(1, Math.max(0, t)));
+        };
+      };
+      const ease = bezier(0.76, 0, 0.24, 1);
+      let resolve;
+      const finished = new Promise((done) => { resolve = done; });
+
+      const step = (now) => {
+        const progress = Math.min(1, (now - started) / duration);
+        const eased = ease(progress);
+        const to = getTo();
+        const x = from.left + (to.left - from.left) * eased;
+        const y = from.top + (to.top - from.top) * eased - Math.sin(Math.PI * eased) * 14;
+        const width = from.width + (to.width - from.width) * eased;
+        const height = from.height + (to.height - from.height) * eased;
+        clone.style.transform =
+          `translate(${x - from.left}px, ${y - from.top}px) ` +
+          `scale(${width / from.width}, ${height / from.height})`;
+        if (progress < 1) {
+          window.requestAnimationFrame(step);
+        } else {
+          clone.style.transform = `translate(${to.left - from.left}px, ${to.top - from.top}px) ` +
+            `scale(${to.width / from.width}, ${to.height / from.height})`;
+          resolve();
+        }
+      };
+      window.requestAnimationFrame(step);
+
+      return { clone, finished };
+    }
+
+    function dock({ instant = false } = {}) {
+      if (docked || flying) return;
+      if (instant || noFlight()) {
+        portrait.classList.add('is-docked');
+        header.classList.add('is-docked');
+        docked = true;
+        return;
+      }
+
+      const from = portraitFrame.getBoundingClientRect();
+      const to = brandAvatar.getBoundingClientRect();
+      if (!from.width || !to.width) {
+        portrait.classList.add('is-docked');
+        header.classList.add('is-docked');
+        docked = true;
+        return;
+      }
+
+      flying = true;
+      portrait.classList.add('is-departing');
+      const move = flight(from, to, 950);
+      const finish = () => {
+        if (move) move.clone.remove();
+        portrait.classList.remove('is-departing');
+        portrait.classList.add('is-docked');
+        header.classList.add('is-docked');
+        docked = true;
+        flying = false;
+        queuePortraitUpdate();
+      };
+
+      if (!move) {
+        finish();
+      } else {
+        move.animation.finished.then(finish).catch(finish);
+      }
+    }
+
+    function undock({ instant = false } = {}) {
+      if (!docked || flying) return;
+      if (instant || noFlight()) {
+        portrait.classList.remove('is-docked');
+        header.classList.remove('is-docked');
+        docked = false;
+        return;
+      }
+
+      const from = brandAvatar.getBoundingClientRect();
+      flying = true;
+      const move = flightBack(from, () => portraitFrame.getBoundingClientRect(), 830);
+
+      portrait.classList.remove('is-docked');
+      portrait.classList.add('is-returning');
+
+      // o clone decola do avatar; só então o logo reaparece no header
+      const swapHeader = window.setTimeout(() => header.classList.remove('is-docked'), 280);
+
+      const finish = () => {
+        window.clearTimeout(swapHeader);
+        portrait.classList.add('is-landed');
+        portrait.classList.remove('is-returning');
+        if (move) move.clone.remove();
+        void portraitFrame.offsetWidth;
+        portrait.classList.remove('is-landed');
+        header.classList.remove('is-docked');
+        docked = false;
+        flying = false;
+        queuePortraitUpdate();
+      };
+
+      if (!move) {
+        finish();
+      } else {
+        move.finished.then(finish).catch(finish);
+      }
+    }
+
+    function updatePortraitDock() {
+      if (flying) return;
+      if (window.scrollY < 8) {
+        if (docked && portraitFrame.getBoundingClientRect().top > 0) {
+          undock({ instant: true });
+        }
+        return;
+      }
+
+      const rect = portraitFrame.getBoundingClientRect();
+      const limit = edge();
+      const compact = compactQuery.matches;
+
+      if (!docked) {
+        // no mobile o retrato ocupa a largura toda: ele só "embarca"
+        // no header depois de sair de cena, sem deixar um vão visível.
+        if (rect.bottom <= (compact ? limit : limit + 4)) {
+          dock({ instant: compact });
+        } else if (!compact && rect.top <= limit) {
+          dock();
+        }
+      } else if (compact ? rect.bottom > 0 : rect.top > limit + 28) {
+        undock({ instant: compact });
+      }
+    }
+
+    function queuePortraitUpdate() {
+      if (portraitTicking) return;
+      portraitTicking = true;
+      window.requestAnimationFrame(() => {
+        portraitTicking = false;
+        updatePortraitDock();
+      });
+    }
+
+    window.addEventListener('scroll', queuePortraitUpdate, { passive: true });
+    window.addEventListener('resize', queuePortraitUpdate, { passive: true });
+    // ao recarregar no meio da página, reflete o estado já rolado sem animação
+    window.setTimeout(() => {
+      if (window.scrollY < 8) return;
+      const rect = portraitFrame.getBoundingClientRect();
+      if (compactQuery.matches ? rect.bottom <= edge() : rect.top <= edge()) {
+        dock({ instant: true });
+      }
+    }, 120);
+  }
+
   /* ───────────────────── Scrollspy ───────────────────── */
 
   const navLinks = $$('.nav-link');
