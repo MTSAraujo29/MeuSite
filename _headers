@@ -1,6 +1,6 @@
 # Cabeçalhos globais aplicados a todos os caminhos
 /*
-  X-Frame-Options: DENY
+  X-Frame-Options: SAMEORIGIN
   X-XSS-Protection: 1; mode=block
   X-Content-Type-Options: nosniff
   Referrer-Policy: strict-origin-when-cross-origin
@@ -16,3 +16,8 @@
 
 *.css
   Cache-Control: public, max-age=31536000, immutable
+
+/pdf/*
+  Cache-Control: public, max-age=86400
+  X-Frame-Options: SAMEORIGIN
+  X-Robots-Tag: noindex, nofollow

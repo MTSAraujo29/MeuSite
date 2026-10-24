@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://seu-site-netlify.netlify.app/sitemap.xml
+Sitemap: https://matheusaraujodev.netlify.app/sitemap.xml

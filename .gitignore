@@ -1,0 +1,6 @@
+# Artefatos locais de validação e screenshots
+.tmp/
+
+# Arquivos de sistema
+.DS_Store
+Thumbs.db
