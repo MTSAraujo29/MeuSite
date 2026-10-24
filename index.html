@@ -37,7 +37,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=IBM+Plex+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
 
-  <link rel="stylesheet" href="style.css?v=20261024-2">
+  <link rel="stylesheet" href="style.css?v=20261024-8">
   <script>
     (function () {
       document.documentElement.classList.add('js');
@@ -62,7 +62,7 @@
       "@type": "CollegeOrUniversity",
       "name": "Universidade Paulista — UNIP"
     },
-    "knowsAbout": ["Desenvolvimento Web", "APIs", "IoT", "Ciência de Dados"],
+    "knowsAbout": ["Desenvolvimento Web", "APIs", "IoT", "Ciência de Dados", "Inteligência Artificial"],
     "sameAs": [
       "https://github.com/MTSAraujo29",
       "https://www.linkedin.com/in/matheus-ferreira-de-ara%C3%BAjo-0283021ba/"
@@ -171,8 +171,9 @@
             <a class="portrait__frame" href="#sobre" aria-label="Ir para a seção sobre Matheus" data-portrait-frame>
               <img class="portrait__pixels" src="img/retrato-pixel.webp" width="640" height="800" alt="Retrato de Matheus Araujo formado por pontos em meio-tom" fetchpriority="high">
               <img class="portrait__color" src="img/retrato-pixel-color.webp" width="640" height="800" alt="" loading="lazy" decoding="async">
+              <canvas class="portrait__canvas" data-portrait-canvas aria-hidden="true"></canvas>
               <span class="portrait__badge">Pixels · 2026</span>
-              <span class="portrait__hint">ver em cores <span aria-hidden="true">↗</span></span>
+              <span class="portrait__hint">mova o cursor <span aria-hidden="true">↗</span></span>
               <span class="portrait__corners" aria-hidden="true"></span>
             </a>
             <figcaption>
@@ -446,11 +447,11 @@
           </div>
 
           <div class="about__body">
-            <p class="about__lead reveal">Sou desenvolvedor full-stack formado em Ciência da Computação pela UNIP. Gosto de transformar problemas reais em produtos que funcionam — com código limpo, interfaces claras e atenção ao que acontece nos detalhes.</p>
-            <p class="reveal">Comecei na web criando e personalizando interfaces, passei por APIs, bancos de dados e projetos acadêmicos de ponta a ponta. Hoje também exploro dados com Power BI e R para enxergar o que o produto está dizendo. Aprendo construindo — e itero até ficar bom.</p>
+            <p class="about__lead reveal">Sou desenvolvedor full-stack formado em Ciência da Computação pela UNIP e atualmente pós-graduando em IA para Devs pela Estácio. Gosto de transformar problemas reais em produtos que funcionam — com código limpo, interfaces claras e atenção ao que acontece nos detalhes.</p>
+            <p class="reveal">Comecei na web criando e personalizando interfaces, passei por APIs, bancos de dados e projetos acadêmicos de ponta a ponta. Hoje também exploro dados com Power BI e R para enxergar o que o produto está dizendo — e concluí uma formação de 72 horas em Power BI pela Data Science Academy. Aprendo construindo — e itero até ficar bom.</p>
 
             <dl class="about__facts reveal">
-              <div><dt>Formação</dt><dd>Ciência da Computação<br><span>UNIP · 2026</span></dd></div>
+              <div><dt>Formação</dt><dd>Ciência da Computação<br><span>UNIP · 2026</span><br>Pós em IA para Devs<br><span>Estácio · 2027</span></dd></div>
               <div><dt>Foco</dt><dd>Full-stack · APIs · IoT<br><span>Web e produtos digitais</span></dd></div>
               <div><dt>Dados</dt><dd>Power BI · R<br><span>Análise e visualização</span></dd></div>
               <div><dt>Status</dt><dd class="status"><span class="status__dot" aria-hidden="true"></span>Aberto a oportunidades</dd></div>
@@ -516,18 +517,34 @@
           <p class="kicker reveal"><span>04</span> Formação</p>
           <div class="section-head__row">
             <h2 class="section-title reveal" id="education-title">Base técnica,<br><em>comprovada</em>.</h2>
-            <p class="section-intro reveal">Formação em Ciência da Computação e projetos que saíram do papel. O diploma está aqui — e pode ser verificado.</p>
+            <p class="section-intro reveal">Ciência da Computação, pós-graduação em andamento e certificações. Os documentos estão aqui — e podem ser verificados.</p>
           </div>
         </header>
 
         <div class="education__grid">
           <ol class="timeline">
             <li class="timeline__item reveal">
+              <span class="timeline__year">2026–27</span>
+              <div>
+                <p class="timeline__kicker">Pós-graduação · em andamento</p>
+                <h3>IA para Devs</h3>
+                <p>Faculdade Estácio. Formação de 12 meses iniciada em 2026, com conclusão prevista para outubro de 2027.</p>
+              </div>
+            </li>
+            <li class="timeline__item reveal">
               <span class="timeline__year">2026</span>
               <div>
                 <p class="timeline__kicker">Graduação</p>
                 <h3>Bacharelado em Ciência da Computação</h3>
                 <p>Universidade Paulista — UNIP. Conclusão em maio de 2026.</p>
+              </div>
+            </li>
+            <li class="timeline__item reveal">
+              <span class="timeline__year">2026</span>
+              <div>
+                <p class="timeline__kicker">Curso livre · 72 h</p>
+                <h3>Microsoft Power BI para Business Intelligence e Data Science</h3>
+                <p>Data Science Academy. Conclusão em 19 de janeiro de 2026, com aproveitamento de 97%.</p>
               </div>
             </li>
             <li class="timeline__item reveal">
@@ -548,27 +565,52 @@
             </li>
           </ol>
 
-          <aside class="diploma reveal" aria-labelledby="diploma-title">
-            <div class="diploma__seal" aria-hidden="true">
-              <span>UNIP</span>
-              <small>2026</small>
-            </div>
-            <div class="diploma__content">
-              <p class="kicker">Documento verificável</p>
-              <h3 id="diploma-title">Diploma de conclusão</h3>
-              <p class="diploma__course">Bacharelado em Ciência da Computação</p>
-              <dl class="diploma__meta">
-                <div><dt>Instituição</dt><dd>Universidade Paulista — UNIP</dd></div>
-                <div><dt>Registro</dt><dd>Nº 867236 · 13/07/2026</dd></div>
-                <div><dt>Validação</dt><dd>322.322.7a932ce5c4cb</dd></div>
-              </dl>
-              <div class="diploma__actions">
-                <button class="btn btn--primary" type="button" data-diploma-open>Ver diploma <span aria-hidden="true">↗</span></button>
-                <a class="btn btn--ghost" href="pdf/Meu%20diploma.pdf" download="Diploma-Matheus-Ferreira-de-Araujo.pdf">Baixar PDF</a>
+          <div class="education__docs">
+            <aside class="diploma reveal" aria-labelledby="diploma-title">
+              <div class="diploma__seal" aria-hidden="true">
+                <span>UNIP</span>
+                <small>2026</small>
               </div>
-              <a class="diploma__verify" href="https://www.unip.br/aluno/documentos-digitais" target="_blank" rel="noopener noreferrer">Verificar no site da UNIP <span aria-hidden="true">↗</span></a>
-            </div>
-          </aside>
+              <div class="diploma__content">
+                <p class="kicker">Documento verificável</p>
+                <h3 id="diploma-title">Diploma de conclusão</h3>
+                <p class="diploma__course">Bacharelado em Ciência da Computação</p>
+                <dl class="diploma__meta">
+                  <div><dt>Instituição</dt><dd>Universidade Paulista — UNIP</dd></div>
+                  <div><dt>Registro</dt><dd>Nº 867236 · 13/07/2026</dd></div>
+                  <div><dt>Validação</dt><dd>322.322.7a932ce5c4cb</dd></div>
+                </dl>
+                <div class="diploma__actions">
+                  <button class="btn btn--primary" type="button" data-doc-open="pdf/Meu%20diploma.pdf" data-doc-title="Diploma · Matheus Ferreira de Araujo">Ver diploma <span aria-hidden="true">↗</span></button>
+                  <a class="btn btn--ghost" href="pdf/Meu%20diploma.pdf" download="Diploma-Matheus-Ferreira-de-Araujo.pdf">Baixar PDF</a>
+                </div>
+                <a class="diploma__verify" href="https://www.unip.br/aluno/documentos-digitais" target="_blank" rel="noopener noreferrer">Verificar no site da UNIP <span aria-hidden="true">↗</span></a>
+              </div>
+            </aside>
+
+            <aside class="diploma diploma--cert reveal" aria-labelledby="certificate-title">
+              <div class="diploma__seal" aria-hidden="true">
+                <span>DSA</span>
+                <small>72 h</small>
+              </div>
+              <div class="diploma__content">
+                <p class="kicker">Certificado verificável</p>
+                <h3 id="certificate-title">Microsoft Power BI</h3>
+                <p class="diploma__course">para Business Intelligence e Data Science</p>
+                <dl class="diploma__meta">
+                  <div><dt>Instituição</dt><dd>Data Science Academy</dd></div>
+                  <div><dt>Carga horária</dt><dd>72 h · aproveitamento 97%</dd></div>
+                  <div><dt>Conclusão</dt><dd>19 de janeiro de 2026</dd></div>
+                  <div><dt>Código</dt><dd>696e3763f094f5c97c083bbb</dd></div>
+                </dl>
+                <div class="diploma__actions">
+                  <button class="btn btn--primary" type="button" data-doc-open="pdf/Certificado%20PowerBI.pdf" data-doc-title="Certificado · Power BI — Matheus Ferreira de Araujo">Ver certificado <span aria-hidden="true">↗</span></button>
+                  <a class="btn btn--ghost" href="pdf/Certificado%20PowerBI.pdf" download="Certificado-PowerBI-Matheus-Ferreira-de-Araujo.pdf">Baixar PDF</a>
+                </div>
+                <a class="diploma__verify" href="https://mycourse.app/JXEyqQl7tOhvhs1CM" target="_blank" rel="noopener noreferrer">Verificar certificado online <span aria-hidden="true">↗</span></a>
+              </div>
+            </aside>
+          </div>
         </div>
       </div>
     </section>
@@ -633,25 +675,25 @@
     </div>
   </footer>
 
-  <!-- ═════════ DIALOG DO DIPLOMA ═════════ -->
-  <dialog class="diploma-dialog" id="diploma-dialog" aria-labelledby="diploma-dialog-title">
+  <!-- ═════════ DIALOG DE DOCUMENTOS ═════════ -->
+  <dialog class="diploma-dialog" id="doc-dialog" aria-labelledby="doc-dialog-title">
     <div class="diploma-dialog__bar">
-      <p id="diploma-dialog-title">Diploma · Matheus Ferreira de Araujo</p>
+      <p id="doc-dialog-title" data-doc-title>Documento · Matheus Ferreira de Araujo</p>
       <div class="diploma-dialog__tools">
-        <a href="pdf/Meu%20diploma.pdf" target="_blank" rel="noopener noreferrer">Abrir em nova aba <span aria-hidden="true">↗</span></a>
-        <button type="button" class="diploma-dialog__close" data-diploma-close aria-label="Fechar visualização do diploma">
+        <a data-doc-external href="pdf/Meu%20diploma.pdf" target="_blank" rel="noopener noreferrer">Abrir em nova aba <span aria-hidden="true">↗</span></a>
+        <button type="button" class="diploma-dialog__close" data-doc-close aria-label="Fechar visualização do documento">
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
         </button>
       </div>
     </div>
     <div class="diploma-dialog__body">
-      <iframe data-diploma-iframe title="Diploma de Matheus Ferreira de Araujo em formato PDF" loading="lazy"></iframe>
-      <p class="diploma-dialog__fallback">Não conseguiu visualizar? <a href="pdf/Meu%20diploma.pdf" target="_blank" rel="noopener noreferrer">Abra o PDF diretamente</a>.</p>
+      <iframe data-doc-iframe title="Visualização do documento em PDF" loading="lazy"></iframe>
+      <p class="diploma-dialog__fallback">Não conseguiu visualizar? <a data-doc-fallback href="pdf/Meu%20diploma.pdf" target="_blank" rel="noopener noreferrer">Abra o PDF diretamente</a>.</p>
     </div>
   </dialog>
 
   <div class="toast" role="status" aria-live="polite" aria-atomic="true" data-toast></div>
 
-  <script src="script.js?v=20261024-2" defer onerror="document.documentElement.classList.remove('js')"></script>
+  <script src="script.js?v=20261024-8" defer onerror="document.documentElement.classList.remove('js')"></script>
 </body>
 </html>

@@ -392,6 +392,10 @@ body.menu-open .site-header {
   visibility: visible;
 }
 
+.site-header:not(.is-docked) .brand__avatar {
+  transition-duration: 0.14s;
+}
+
 .site-header.is-docked .brand__avatar img {
   transform: scale(1);
 }
@@ -786,7 +790,15 @@ body.menu-open .menu-toggle__lines span:last-child {
   overflow: hidden;
   border: 1px solid var(--line-2);
   box-shadow: 0 40px 100px -50px color-mix(in srgb, var(--accent) 55%, black);
-  transition: opacity 0.32s var(--ease), visibility 0.32s;
+  transition: opacity 0.32s var(--ease), visibility 0.32s,
+    background-color 0.24s var(--ease), border-color 0.3s var(--ease),
+    box-shadow 0.3s var(--ease);
+}
+
+.portrait.is-clearing .portrait__frame {
+  background-color: transparent;
+  border-color: transparent;
+  box-shadow: none;
 }
 
 .portrait__pixels,
@@ -797,6 +809,10 @@ body.menu-open .menu-toggle__lines span:last-child {
   object-position: center 24%;
 }
 
+.portrait__pixels {
+  transition: opacity 0.5s var(--ease);
+}
+
 .portrait__color {
   position: absolute;
   inset: 0;
@@ -805,8 +821,29 @@ body.menu-open .menu-toggle__lines span:last-child {
   transition: opacity 0.55s var(--ease);
 }
 
+.portrait__canvas {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  display: block;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.5s var(--ease);
+}
+
 .portrait__frame:hover .portrait__color,
 .portrait__frame:focus-visible .portrait__color {
+  opacity: 1;
+}
+
+.portrait__frame.is-dotty .portrait__pixels,
+.portrait__frame.is-dotty .portrait__color {
+  opacity: 0;
+}
+
+.portrait__frame.is-dotty .portrait__canvas {
   opacity: 1;
 }
 
@@ -822,12 +859,6 @@ body.menu-open .menu-toggle__lines span:last-child {
   transition: opacity 0.28s var(--ease), visibility 0.28s;
 }
 
-.portrait.is-departing .portrait__frame,
-.portrait.is-returning .portrait__frame {
-  opacity: 0;
-  pointer-events: none;
-}
-
 .portrait.is-docked .portrait__frame {
   opacity: 0;
   visibility: hidden;
@@ -839,55 +870,15 @@ body.menu-open .menu-toggle__lines span:last-child {
   visibility: hidden;
 }
 
-/* troca sem fade: o clone some e o retrato real assume no mesmo frame */
-.portrait.is-landed .portrait__frame,
-.portrait.is-landed figcaption {
-  opacity: 1;
-  visibility: visible;
-  transition: none;
-}
-
-/* Retrato em voo: parte do herói e pousa no avatar do header. */
-.portrait-flight {
+/* Camada fixa que desenha os pontos em voo e o mini-retrato do header. */
+.portrait-fly {
   position: fixed;
+  inset: 0;
   z-index: 1100;
-  margin: 0;
-  overflow: hidden;
-  background: var(--paper);
-  border: 1px solid var(--line-2);
-  pointer-events: none;
-  transform-origin: top left;
-  box-shadow: 0 30px 80px -30px rgba(0, 0, 0, 0.55);
-}
-
-.portrait-flight img {
+  display: block;
   width: 100%;
   height: 100%;
-  object-fit: cover;
-  object-position: center 24%;
-}
-
-.portrait-flight::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(115deg, transparent 30%, rgba(255, 255, 255, 0.12), transparent 70%);
-  opacity: 0;
-  animation: flightSheen 0.8s var(--ease) forwards;
-}
-
-@keyframes flightSheen {
-  0% {
-    opacity: 0;
-    transform: translateX(-100%);
-  }
-  45% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 0;
-    transform: translateX(100%);
-  }
+  pointer-events: none;
 }
 
 .portrait__badge,
@@ -920,6 +911,13 @@ body.menu-open .menu-toggle__lines span:last-child {
 .portrait__frame:focus-visible .portrait__hint {
   opacity: 0;
   transform: translateY(4px);
+}
+
+.portrait.is-flying .portrait__badge,
+.portrait.is-flying .portrait__hint,
+.portrait.is-flying figcaption {
+  opacity: 0;
+  visibility: hidden;
 }
 
 .portrait__corners::before,
@@ -1552,6 +1550,12 @@ body.menu-open .menu-toggle__lines span:last-child {
   grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
   gap: clamp(32px, 5vw, 72px);
   align-items: start;
+}
+
+.education__docs {
+  display: grid;
+  gap: 16px;
+  align-self: start;
 }
 
 .timeline {
@@ -2252,6 +2256,10 @@ body.dialog-open {
     max-width: 620px;
   }
 
+  .education__docs {
+    max-width: 620px;
+  }
+
   .contact__grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
@@ -2463,6 +2471,10 @@ body.dialog-open {
   .diploma {
     grid-template-columns: 1fr;
     gap: 18px;
+    max-width: none;
+  }
+
+  .education__docs {
     max-width: none;
   }
 
